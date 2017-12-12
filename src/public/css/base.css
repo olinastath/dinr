@@ -1,0 +1,294 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,200italic,100italic,300,300italic,400italic,500,500italic,600,600italic,900,800italic,900italic,800,700italic,700);
+
+body {
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #cc0000;
+}
+
+#edit-profile, #make-event, #restaurants{
+	position: absolute;
+	-webkit-transform: translate(-50%,-50%);
+	   -moz-transform: translate(-50%,-50%);
+		 -o-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+}
+.body-container {
+	/*border: 1px solid black;*/
+	position: absolute;
+	-webkit-transform: translate(-50%,-50%);
+	   -moz-transform: translate(-50%,-50%);
+		 -o-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	width: 80%;
+	min-height: 40%;
+	min-width: 20%;
+}
+
+.btn {
+	background-color: white;
+	color: black;
+	/*-webkit-transform: translate(0%,-50%);
+	   -moz-transform: translate(0%,-50%);
+		 -o-transform: translate(0%,-50%);
+			transform: translate(0%,-50%);*/
+	margin-top: 35px;
+}
+
+.btn:hover {
+	background-color: white;
+	color: black;
+}
+
+.nav-logo {
+	text-shadow: 1px 1px #cc0000;
+	z-index: 100;
+	position: absolute;
+	left: 5%;
+	top: -2px;
+	font-size: 55px;
+}
+
+.nav {
+	position: absolute;
+	display: inline-block;
+	left: 90%;
+	top: 8px;
+}
+
+.nav-content {
+	-webkit-transform: translate(-25%, 0%);
+	   -moz-transform: translate(-25%, 0%);
+		 -o-transform: translate(-25%, 0%);
+			transform: translate(-25%, 0%);
+	font-size: 14px;
+	float: right;
+	display: none;
+	position: absolute;
+	margin-top: 45px;
+	background-color: #f9f9f9;
+	min-width: 120px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.nav-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-content a:hover {
+	background-color: #f1f1f1;
+}
+
+.nav:hover .nav-content {
+	display: block;
+}
+
+#social { /* container for social media links */
+	margin-top: 60px;
+	position: absolute;
+	vertical-align: middle;
+	right: 10%;
+}
+
+#social a {
+	padding-right: 15px;
+}
+
+.container {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	   -moz-transform: translate(-50%,-50%);
+		 -o-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.event-name {
+	text-decoration: underline;
+}
+
+.error {
+	margin-top: -43px;
+}
+
+
+.error h1 {
+	font-size: 250px;
+	text-shadow: 1px 1px #cc0000;
+	margin-top: -100px;
+	margin-bottom: 20px;
+}
+
+.error p {
+	font-size: 13px;
+	color: #cc0000;
+	/*padding-top: -10px;*/
+	/*padding-bottom: 10px;*/
+}
+
+.error i {
+	font-size: 11px;
+}
+
+#restaurants {
+	top: 0%;
+	position: absolute;
+	width: 100%;	
+	height: 100%;
+}
+
+#restaurants ul {
+	margin-top: 50px;
+	/*margin-left: 20%;*/
+	columns: 2;
+	/*width: 70%;*/
+}
+#restaurants li {
+	margin-bottom: 60px;
+}
+
+.restaurant-name {
+	/*margin-bottom: -10px;*/
+	font-size: 18px;
+}
+
+#stars {
+	color: #cc0000;
+}
+
+#restaurant-details {
+	font-size: 13px;
+}
+
+#restaurants div {
+	display: inline-block;;
+	vertical-align: middle;
+}
+
+#restaurants img {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	box-shadow: 2px 2px 4px silver;
+	margin-right: 10px;
+}
+
+#register-form {
+	display: none;
+}
+
+.register-login-container {
+	left: 50%;
+	-webkit-transform: translate(-50%,0);
+	   -moz-transform: translate(-50%,0);
+		 -o-transform: translate(-50%,0);
+			transform: translate(-50%,0);
+	width: 250px;
+	display: block;
+	position: relative;
+}
+
+button, [type=submit] {
+    background-color: #d3d3d3; /*gray*/
+    border: none;
+    color: #3f3f3f;
+    width: 50%;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: none;
+    float: left;
+}
+
+[type=submit] {
+	float: none;
+	margin-top: 5%;
+}
+
+button:hover, #login-button, [type=submit]:hover {
+	background-color: #cc0000; 
+	color: white;	
+}
+
+.register-login-container .content {
+	padding-top: 30%;
+	padding-bottom: 20%;
+	margin-bottom: 0px;
+	border: 1px solid #cc0000;
+}
+
+.username, .name, .dob, .restrictions, .members {
+	text-align: left;	
+	margin-top: 10px;
+}
+
+.name input {
+	padding-left: 12px;
+}
+
+.restrictions ul {
+	padding-left: 0px;
+	margin-top: 5px;
+}
+
+ul {
+	list-style: none;
+	text-align: left;
+}
+
+.members-restrictions {
+	vertical-align: top;
+	display: inline-block;
+	padding-bottom: 10px;
+	width: 250px;
+}
+
+.information, .friends {
+	display: block;
+}
+
+.information-friends {
+	vertical-align: top;
+	display: inline-block;
+	padding-bottom: 10px;
+	margin-left: 150px;
+	width: 200px;
+}
+
+.events {
+	width: 60%;
+	vertical-align: top;
+	display: inline-block;
+	padding-bottom: 10px;
+	padding-right: 50px;
+}
+
+#generate-restaurants input { 
+	width: 200px;
+}
+
+#add-friend input {
+	width: 150px;
+}

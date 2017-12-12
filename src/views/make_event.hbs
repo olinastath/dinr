@@ -1,0 +1,22 @@
+<form action="/make-event" method="post" id="make-event">
+    <h1>Make an Event</h1>
+    <div class="name">
+        <label>Event Name:</label>
+        <input type="text" name="name"/>
+    </div>
+    <div class="date">
+        <label>Set Date/Time:</label></br>
+        <input type="datetime-local" name="datetime">
+    </div>
+    <div class="members">
+        <label>Add members:</label><br>
+        <ul style="list-style: none">
+            {{#each user.friends as |friend|}}
+                <li><input type="checkbox" name={{friend._id}}><label for={{friend._id}}>{{friend.name}}</label></input></li>
+            {{/each}}
+        </ul>
+    </div>
+    <div>
+        <input type="submit" value="make event"/>
+    </div>
+</form>

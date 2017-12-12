@@ -1,0 +1,19 @@
+{
+  "rating": 4,
+  "price": "$",
+  "id": "four-barrel-coffee-san-francisco",
+  "is_closed": false,
+  "categories": [
+    {
+     "alias": "coffee",
+     "title": "Coffee & Tea"
+    }
+  ],
+  "name": "Four Barrel Coffee",
+  "url": "https://www.yelp.com/biz/four-barrel-coffee-san-francisco",
+},
+
+Gluten-Free (gluten_free)
+Vegan (vegan)
+Vegetarian (vegetarian)
+Kosher (kosher)

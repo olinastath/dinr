@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+	<head>
+		<title>Dinr</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css">
+		<script src="https://use.fontawesome.com/64f15d16fa.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1><a href="/" class="nav-logo">Dinr</a></h1>
+			{{#if user}}
+				<div class="nav">
+					<button class="btn btn-success">
+						<i class="fa fa-user-circle-o fa-3x nav-logo" aria-hidden="true"></i>
+					</button>
+					<div class="nav-content">
+						<a href="../user/{{user.username}}">view profile</a>
+						<a href="../edit-profile">edit profile</a>
+						<a href="../make-event">create event</a>
+						<a href="../logout">log out</a>
+					</div>
+				</div>	
+			{{/if}}
+			<div class="body-container">
+				{{{body}}}
+			</div>
+		</div>
+	</body>
+</html>

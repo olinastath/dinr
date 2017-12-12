@@ -1,0 +1,24 @@
+<form action="/edit-profile" method="post" id="edit-profile">
+    <h1>Edit your Profile</h1>
+    <div class="name">
+        <label>Name:</label>
+        <input type="text" name="name"/>
+    </div>
+    <div class="dob">
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" min="1950-12-31" max="2000-12-31"/>
+    </div>
+    <div class="restrictions">
+        <label>Dietary Restrictions?</label><br>
+        <ul style="list-style: none">
+            <li><input type="checkbox" name="gluten-free" id="gluten-free"><label for="gluten-free">gluten-free</label></input></li>
+            <li><input type="checkbox" name="kosher" id="kosher"><label for="kosher">kosher</label></input></li>
+            <li><input type="checkbox" name="pescatarian" id="pescatarian"><label for="pescatarian">pescatarian</label></input></li>
+            <li><input type="checkbox" name="vegan" id="vegan"><label for="vegan">vegan</label></input></li>
+            <li><input type="checkbox" name="vegetarian" id="vegetarian"><label for="vegetarian">vegetarian</label></input></li>
+        </ul>
+    </div>
+    <div>
+        <input type="submit" value="save profile"/>
+    </div>
+</form>

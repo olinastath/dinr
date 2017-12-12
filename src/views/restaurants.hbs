@@ -1,0 +1,32 @@
+<div id="restaurants">
+	<h1>Restaurants</h1>
+	{{#if list}}
+		<ul>
+			{{#each list}}
+				<li>
+					<div><img src="{{image}}"></div>
+					<div>
+						<a href="{{url}}" class="restaurant-name">{{name}}</a>
+						<br>
+						<span id="restaurant-details">
+							{{#if stars}}
+								<span id="stars">{{{stars}}}</span>
+							{{/if}}
+							{{#if price}}
+								<span id="price">({{price}})</span>
+							{{/if}}
+							{{#if address}}
+								<span id="address">{{address}}</span>
+							{{/if}}
+							{{#if cuisine}}
+								<span id="cuisine"><br>{{cuisine}}</span>
+							{{/if}}
+						</span>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+	No restaurants to display! Please go back and generate again.
+	{{/if}}
+</div>

@@ -1,0 +1,37 @@
+<form action="/event/{{event._id}}" method="get" id="event-page">
+    <h1>{{event.name}}</h1>
+
+    <div class="members-restrictions">
+        <div class="members">
+            <h2>Members</h2>
+            {{#if numUsers}}
+                <ul>
+                    {{#each event.users as |member|}}
+                        <li><a href="../user/{{member.username}}">{{member.name}}</a></li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No members yet!</p>
+            {{/if}}
+        </div> 
+        <div class="restrictions">
+            <h2>Dietary Restrictions</h2>
+            {{#if numRestr}}
+                <ul>
+                    {{#each event.restrictions as |rest|}}
+                        <li><input type = "checkbox" checked><label>{{rest}}</label></li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No restrictions!</p>
+            {{/if}}
+        </div>
+    </div>
+</form>
+
+{{#if numRestr}}
+    <form action="/generate/{{slug}}" method="post" id="generate-restaurants">
+        <input type="submit" value="generate restaurants!"/>
+    </form>
+{{/if}}
+

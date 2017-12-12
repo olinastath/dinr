@@ -1,0 +1,74 @@
+<form action="/user/{{user.username}}" method="get" id="user-profile">
+    {{#if userCondition}}
+        <h1> {{profile.name}}'s Profile</h1>
+    {{else}}
+        <h1> Hi, {{profile.name}}!</h1>
+    {{/if}}
+
+    <div class="information-friends">
+        <div class="information">
+            <h2>Personal Details</h2>
+            <div class="username">
+                <label>Username:</label> {{profile.username}}
+            </div>
+            <div class="name">
+                <label>Name:</label> {{profile.name}}
+            </div>
+            <div class="dob">
+                <label>Date of Birth:</label> 
+                {{#if profile.dob}} 
+                    {{profile.dob}}
+                {{/if}}
+            </div>
+            <div class="restrictions">
+                <label>Dietary Restrictions?</label><br>
+                <ul>
+                    {{#each profile.restrictions as |rest|}}
+                        <li><input type = "checkbox" checked><label>{{rest}}</label></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="friends">
+            <h2>Friends</h2>
+            {{#if profile.friends}}
+                <ul>
+                    {{#each profile.friends as |friend|}}
+                        <li><a href="./{{friend.username}}">{{friend.name}}</a></li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No friends yet!</p>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="events">
+        <h2>Events</h2>
+        {{#if profile.events}}
+            <ul>
+                {{#each profile.events as |event|}}
+                    <li>
+                        <a href="/event/{{event._id}}"><span class="event-name">{{event.name}}</span> - {{event.datetime}}</a><br/>
+                        <ul>
+                            {{#each event.members as |member|}}
+                                <li>{{member.name}}</li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <p>No events yet!</p>
+        {{/if}}
+    </div>
+</form>
+
+{{#if addCondition}}
+    <form action="/add-friend/{{slug}}" method="post" id="add-friend">
+        <input type="submit" value="add friend"/>
+    </form>
+{{/if}}
+
+<script src="../javascript/friend.js"></script>
