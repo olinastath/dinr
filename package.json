@@ -4,7 +4,8 @@
   "description": "web app that allows users to look for personalized restaurant recommendations based on their (and their friends'!) dietary restrcitions",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
