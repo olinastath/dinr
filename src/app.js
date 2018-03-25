@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const yelp = require('yelp-fusion');
 const allRestrictions = ['gluten-free', 'kosher', 'pescatarian', 'vegan', 'vegetarian'];
 const clientId = process.env.CLIENTID || require('./config.js').clientId;
-const clientSecret = process.env.CLIENTSECRET || require('./config.js').clientSecret;
+const apiKey = process.env.APIKEY || require('./config.js').apiKey;
 const app = express();
 const session = require('express-session');
 const sessionOptions = {
@@ -59,7 +59,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const db = process.env.MONGODB_URI || require('./config.js').mongoKey;
-mongoose.connect(db);
+mongoose.connect(db, { useMongoClient: true });
 
 
 // body parser setup
@@ -344,74 +344,72 @@ app.post('/generate/:slug', authenticated, function(req, res) {
 		if (err) {
 			throw err;
 		} else if (event !== null) {
-			yelp.accessToken(clientId, clientSecret).then(response => {
-				const client = yelp.client(response.jsonBody.access_token);
-				const promises = [];
-				const newRestaurants = [];
-				for (let i = 0; i < event.restrictions.length; i++) {
-					promises.push(new Promise(function(fulfill) {
-						client.search({
-							term:'restaurant',
-							categories: event.restrictions[i],
-							location: 'new york, ny',
-							// limit: 12
-						}).then(response => {
-							response.jsonBody.businesses.forEach((business) => {
-								console.log(business.name);
-								Restaurant.findOne({id: business.id}, function(err, restaurant) {
-									if (restaurant === null) {
-										const restaurant = new Restaurant({
-											name: business.name,
-											image: business.image_url,
-											id: business.id,
-											rating: business.rating,
-											stars: getRating(business.rating),
-											price: business.price,
-											categories: business.categories.map((cat) => cat.alias),
-											url: business.url,
-											address: business.location.display_address.reduce((addr, curr) => addr + ' ' + curr, ''),
-											cuisine: business.categories.map((cat) => cat.title).reduce((addr, curr) => addr + ', ' + curr, '').substring(2)
-										});
+			const client = yelp.client(apiKey);
+			const promises = [];
+			const newRestaurants = [];
+			for (let i = 0; i < event.restrictions.length; i++) {
+				promises.push(new Promise(function(fulfill) {
+					client.search({
+						term:'restaurant',
+						categories: event.restrictions[i],
+						location: 'new york, ny',
+						// limit: 12
+					}).then(response => {
+						response.jsonBody.businesses.forEach((business) => {
+							// console.log(business.name);
+							Restaurant.findOne({id: business.id}, function(err, restaurant) {
+								if (restaurant === null) {
+									const restaurant = new Restaurant({
+										name: business.name,
+										image: business.image_url,
+										id: business.id,
+										rating: business.rating,
+										stars: getRating(business.rating),
+										price: business.price,
+										categories: business.categories.map((cat) => cat.alias),
+										url: business.url,
+										address: business.location.display_address.reduce((addr, curr) => addr + ' ' + curr, ''),
+										cuisine: business.categories.map((cat) => cat.title).reduce((addr, curr) => addr + ', ' + curr, '').substring(2)
+									});
 
-										restaurant.save(function(err, restaurant) {
-											if (err) {
-												console.log(err);
-											} else {
-												newRestaurants.push(restaurant);
-											}
-										});
-									} else {
-										newRestaurants.push(restaurant);
-									}
-								});
+									restaurant.save().then(function(err, restaurant) {
+										if (err) {
+											console.log(err);
+										} else {
+											newRestaurants.push(restaurant);
+										}
+									});
+								} else {
+									newRestaurants.push(restaurant);
+								}
 							});
-							fulfill();
-						});	
-					}));
-				}
+						});
+						fulfill();
+					});	
+				}));
+			}
 
-				Promise.all(promises).then(function() {
-					const indices = [];
-					newRestaurants.map((rest) => rest.id).filter((value, index, r) => {
-						if (r.indexOf(value) === index) {
-							indices.push(index);
-						}
-						return r.indexOf(value) === index;
-					});
-					const unique = indices.map((i) => newRestaurants[i]);
-					Event.findOneAndUpdate({_id: req.params.slug}, {
-						$set: {
-							restaurants: unique
-						}
-					}, function(err) {
-						if (err) {
-							throw err;
-						}
-						res.redirect('/generate/' + req.params.slug);
-					});
+			Promise.all(promises).then(function() {
+				const indices = [];
+				newRestaurants.map((rest) => rest.id).filter((value, index, r) => {
+					if (r.indexOf(value) === index) {
+						indices.push(index);
+					}
+					return r.indexOf(value) === index;
 				});
-			}).catch(e => {
-				console.log(e);
+				const unique = indices.map((i) => newRestaurants[i]);
+				Event.findOneAndUpdate({_id: req.params.slug}, {
+					$set: {
+						restaurants: unique
+					}
+				}, function(err) {
+					if (err) {
+						throw err;
+					}
+					res.redirect('/generate/' + req.params.slug);
+				});
+			// }).catch(e => {
+				// console.log(e);
 			});
 		} else {
 			res.render('error', {message: 'you aren\'t authorized to view this page'});
