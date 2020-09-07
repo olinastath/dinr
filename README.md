@@ -123,3 +123,5 @@ An Example Restaurant:
 5. [Using Promises](https://stackoverflow.com/questions/38362231/how-to-use-promise-in-foreach-loop-of-array-to-populate-an-object)
 6. [Hovering dropdown menu](https://www.w3schools.com/howto/howto_css_dropdown.asp)
 7. [Dealing with authentication errors when logging in](https://github.com/jaredhanson/passport-local/issues/4)
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y225QO7)
